@@ -48,4 +48,13 @@ const useDetailsNavigation = () => {
   return navigateToDetails;
 };
 
-export { formatDate, renderImage, useDetailsNavigation };
+const creatingKey = () => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  for (let i = 0; i < 100; i += 1) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length - 1));
+  }
+  return result;
+};
+
+export { formatDate, renderImage, useDetailsNavigation, creatingKey };

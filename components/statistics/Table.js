@@ -1,16 +1,22 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
+import { creatingKey, renderImage } from '../home/expenses-and-incomes-lists/Tables/utils';
+
+const { height } = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
-    marginTop: 30,
-    paddingTop: 10,
     backgroundColor: '#EFEEEE',
+    paddingTop: 10,
+    minHeight: height,
+    maxHeight: '100%',
   },
   scrollView: {
-    minHeight: 350,
+    flexDirection: 'column',
+    marginTop: 30,
+    // backgroundColor: '#EFEEEE',
   },
   row: {
     flexDirection: 'row',
@@ -56,13 +62,13 @@ const styles = StyleSheet.create({
 
 function Table({ tableData, currency }) {
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
         {tableData.map((rowData, index) => {
           const isLastItem = index === tableData.length - 1;
           return (
             <View
-              key={rowData.category}
+              key={creatingKey()}
               style={[
                 styles.row,
                 {
@@ -73,7 +79,8 @@ function Table({ tableData, currency }) {
               <View style={styles.leftCol}>
                 <Text style={styles.percentage}>{rowData.percentage}%</Text>
                 <View style={[styles.dot, { backgroundColor: rowData.svg.fill }]} />
-                <Text style={styles.category}>{rowData.category}</Text>
+                {renderImage(rowData.category)}
+                <Text style={styles.category}>{rowData.category.title}</Text>
               </View>
 
               <Text style={styles.total}>
@@ -82,8 +89,8 @@ function Table({ tableData, currency }) {
             </View>
           );
         })}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 

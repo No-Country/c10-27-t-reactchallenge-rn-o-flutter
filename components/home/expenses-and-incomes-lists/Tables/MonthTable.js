@@ -2,9 +2,9 @@ import React from 'react';
 import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
-import { renderImage, useDetailsNavigation } from './utils';
+import { renderImage, useDetailsNavigation, creatingKey } from './utils';
 
-function MonthTable({ tableData, listOfCategories }) {
+function MonthTable({ tableData }) {
   const navigateToDetails = useDetailsNavigation();
 
   const renderTableHeader = () => (
@@ -44,7 +44,7 @@ function MonthTable({ tableData, listOfCategories }) {
     return sortedKeys.flatMap((month, i) => {
       const monthData = groupedData[month];
       const rows = monthData.map((rowData, j) => (
-        <View key={rowData.key} style={j === 0 ? styles.startingTableRow : styles.tableRow}>
+        <View key={creatingKey()} style={j === 0 ? styles.startingTableRow : styles.tableRow}>
           {j === 0 && (
             <View style={styles.label}>
               <Text style={styles.labelText}>{month}</Text>
@@ -62,8 +62,8 @@ function MonthTable({ tableData, listOfCategories }) {
             }
           >
             <View style={[styles.tableCell, styles.categoryCell]}>
-              {renderImage(listOfCategories[rowData.category])}
-              <Text>{rowData.category}</Text>
+              {renderImage(rowData.category)}
+              <Text>{rowData.category.title}</Text>
             </View>
             <Text style={[styles.tableCell, styles.amountCell]}>{rowData.amount}</Text>
           </TouchableOpacity>
@@ -89,7 +89,6 @@ function MonthTable({ tableData, listOfCategories }) {
 
 MonthTable.propTypes = {
   tableData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  listOfCategories: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default MonthTable;

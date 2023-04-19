@@ -5,21 +5,26 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 import getAsyncStorageData from '../../../../utils/get-storage-data';
-import DayTable from './DayTable';
-import WeekTable from './WeekTable';
-import MonthTable from './MonthTable';
+
 import { MockedDataContext } from '../../../../hooks/useMockedData';
 import useCategories from '../../../../hooks/useCategories';
+import Table from './Table';
 
 const tableComponents = {
-  1: DayTable,
-  2: WeekTable,
-  3: MonthTable,
+  1: Table,
+  2: Table,
+  3: Table,
 };
 
 function RenderSelectedTable({ buttonClicked, tableData, listOfCategories }) {
   const TableComponent = tableComponents[buttonClicked];
-  return <TableComponent tableData={tableData} listOfCategories={listOfCategories} />;
+  return (
+    <TableComponent
+      tableData={tableData}
+      listOfCategories={listOfCategories}
+      typeTable={buttonClicked}
+    />
+  );
 }
 
 const styles = StyleSheet.create({

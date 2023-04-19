@@ -23,17 +23,17 @@ function getCategoryData(arr) {
 
   arr.forEach((obj) => {
     const { category, amount } = obj;
-    if (category in categorySums) {
-      categorySums[category].total += amount;
+    if (category.title in categorySums) {
+      categorySums[category.title].total += amount;
     } else {
-      categorySums[category] = { total: amount, percentage: 0 };
+      categorySums[category.title] = { total: amount, percentage: 0, category };
     }
   });
 
   const categoryData = Object.keys(categorySums).map((category) => {
-    const { total: sum } = categorySums[category];
+    const { total: sum, category: categoryInObject } = categorySums[category];
     const percentage = ((sum / total) * 100).toFixed(2);
-    return { category, total: sum.toFixed(2), percentage };
+    return { category: categoryInObject, total: sum.toFixed(2), percentage };
   });
 
   categoryData.sort((a, b) => b.total - a.total); // sort in descending order by "total" value

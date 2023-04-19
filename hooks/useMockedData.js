@@ -2,6 +2,9 @@
 import React, { useState, useEffect, createContext } from 'react';
 import PropTypes from 'prop-types';
 import getAsyncStorageData from '../utils/get-storage-data';
+import CategoriesExport from '../assets/categories/categoriesExport';
+
+const { ListOfExpenditureCategories } = CategoriesExport();
 
 const generateRandomTableData = (currency) => {
   const generateRandomDate = () => {
@@ -17,7 +20,7 @@ const generateRandomTableData = (currency) => {
     return `${randomAmount.toFixed(2)} ${currency}`;
   };
 
-  const categories = ['Salud', 'Educación', 'Higiene', 'Hogar', 'Transporte', 'Comida', 'Ocio'];
+  const categories = ListOfExpenditureCategories;
 
   const tableData = [];
   const usedKeys = new Set();

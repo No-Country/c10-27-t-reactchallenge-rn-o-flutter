@@ -123,7 +123,7 @@ export default function Transactions({ navigation, params }) {
         amount: enterAmount,
         account: selectAccount,
         date,
-        category: selectedCategory.title,
+        category: selectedCategory,
         annotations,
       };
 
