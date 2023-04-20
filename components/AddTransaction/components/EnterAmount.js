@@ -99,6 +99,7 @@ export default function EnterAmount({
             value={enterConcept}
             onChangeText={changeConcept}
             style={EnterAmountStyles.inputConcept}
+            maxLength={17}
           />
         </View>
       </View>
