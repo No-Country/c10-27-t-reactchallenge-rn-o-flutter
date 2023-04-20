@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, View, StyleSheet, Text, Dimensions } from 'react-native';
+import { ScrollView, View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Searchbar, Button } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 
 import PlusIcon from '../../../assets/categories/icons/PlusIcon.svg';
 import CategoriesExport from '../../../assets/categories/categoriesExport';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 const { whiteListOfIcons } = CategoriesExport();
 
 const styles = StyleSheet.create({
@@ -15,22 +15,23 @@ const styles = StyleSheet.create({
     minHeight: height,
     flexDirection: 'column',
     paddingVertical: 20,
-    gap: 40,
+    gap: 10,
     backgroundColor: '#F6F6FD',
   },
   categoryContainer: {
     width: '100%',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    marginHorizontal: 10,
+    paddingTop: 14,
+    marginBottom: `${(height / 100) * 10}%`,
     // justifyContent: 'space-evenly',
   },
   itemContainer: {
     width: '25%',
-    // width: `${width < 400 ? '25%' : 0}`,
   },
   item: {
     marginBottom: 10,
-    // width: `${width < 400 ? '25%' : 76}`,
     width: 76,
     height: 71,
     flexDirection: 'column',
@@ -104,38 +105,29 @@ export default function AddCategory({ navigation, route }) {
   const renderCategoriesItems = () => {
     const items = itemsCategoriesCopy.map((item) => (
       <View style={styles.itemContainer} key={item.id}>
-        <View
+        <TouchableOpacity
+          onPress={() => changeSelectedCategorie(item)}
           style={{
             ...styles.item,
-            backgroundColor: `${
-              item.id === selecdCategorie.id ? item.backgroundColor : 'transparent'
-            }`,
+            backgroundColor: item.backgroundColor,
           }}
+          activeOpacity={0.8}
         >
-          {/* <Image source={item.image} style={styles.image} /> */}
-          <View style={{ ...styles.imageItemContainer, backgroundColor: item.backgroundColor }}>
-            {renderImage({ imageIndex: item.image })}
-          </View>
-          <Text style={styles.titleItems}>{item.title}</Text>
-          <Button
-            mode="contained"
+          <View
             style={{
-              position: 'absolute',
-              height: '100%',
-              width: '100%',
-              borderRadius: 10,
-              backgroundColor: 'transparent',
+              ...styles.item,
+              backgroundColor: `${
+                item.id === selecdCategorie.id ? item.backgroundColor : '#F6F6FD'
+              }`,
             }}
-            labelStyle={{ width: '100%', paddingVertical: `${width < 400 ? '20%' : '30%'}` }}
-            onPress={() => changeSelectedCategorie(item)}
-            theme={{
-              colors: {
-                primary: 'transparent',
-                onPrimary: item.backgroundColor,
-              },
-            }}
-          />
-        </View>
+          >
+            {/* <Image source={item.image} style={styles.image} /> */}
+            <View style={{ ...styles.imageItemContainer, backgroundColor: item.backgroundColor }}>
+              {renderImage({ imageIndex: item.image })}
+            </View>
+            <Text style={styles.titleItems}>{item.title}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     ));
     return items;
@@ -163,48 +155,41 @@ export default function AddCategory({ navigation, route }) {
   }, [searchQuery, listOfCategories]);
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Searchbar
-          onChangeText={onChangeSearch}
-          placeholder="Encuentra una categoría"
-          placeholderTextColor="#9BA5B3"
-          iconColor="#FA6C17"
-          style={{
-            paddingHorizontal: 10,
-            marginHorizontal: 10,
-            borderRadius: 10,
-            backgroundColor: '#FEFFFF',
-            borderWidth: 1,
-            borderColor: '#a9aaaa',
-          }}
-          fontSize={16}
-          fontFamily="ubuntu-regular"
-        />
+    <View style={styles.container}>
+      <Searchbar
+        onChangeText={onChangeSearch}
+        placeholder="Encuentra una categoría"
+        placeholderTextColor="#9BA5B3"
+        iconColor="#FA6C17"
+        style={{
+          paddingHorizontal: 10,
+          marginHorizontal: 10,
+          borderRadius: 10,
+          backgroundColor: '#FEFFFF',
+          borderWidth: 1,
+          borderColor: '#a9aaaa',
+        }}
+        fontSize={16}
+        // fontFamily="ubuntu-regular"
+      />
+      <ScrollView>
         <View style={styles.categoryContainer}>
           {itemsCategoriesCopy && renderCategoriesItems()}
-
-          <View style={styles.item}>
-            <View style={{ ...styles.imageItemContainer, backgroundColor: '#FA6C17' }}>
-              <PlusIcon />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={{ ...styles.item, backgroundColor: '#FA6C17' }}
+            onPress={() => navigation.navigate('CreateCategory', { nameTransaction })}
+          >
+            <View style={{ ...styles.item, backgroundColor: '#F6F6FD' }}>
+              <View style={{ ...styles.imageItemContainer, backgroundColor: '#FA6C17' }}>
+                <PlusIcon />
+              </View>
+              <Text style={styles.titleItems}>Crear</Text>
             </View>
-            <Text style={styles.titleItems}>Crear</Text>
-            <Button
-              mode="contained"
-              style={{ position: 'absolute', height: '100%', width: '100%', borderRadius: 10 }}
-              labelStyle={{ width: '100%', paddingVertical: `${width < 400 ? '20%' : '30%'}` }}
-              onPress={() => navigation.navigate('CreateCategory', { nameTransaction })}
-              theme={{
-                colors: {
-                  primary: 'transparent',
-                  onPrimary: '#FA6C17',
-                },
-              }}
-            />
-          </View>
+          </TouchableOpacity>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 

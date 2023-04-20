@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { renderImage, useDetailsNavigation } from './utils';
@@ -85,11 +85,11 @@ function DayTable({ tableData, listOfCategories }) {
   };
 
   return (
-    <View contentContainerStyle={{ minHeight: 500 }}>
-      <View style={styles.container}>
-        {renderTableHeader()}
+    <View style={styles.container}>
+      {renderTableHeader()}
+      <ScrollView contentContainerStyle={styles.container_view}>
         <View style={styles.tableRowContainer}>{renderTableRow()}</View>
-      </View>
+      </ScrollView>
     </View>
   );
 }

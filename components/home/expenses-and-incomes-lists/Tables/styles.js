@@ -1,9 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const { height } = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F6F6FD',
     paddingTop: 24,
+  },
+  container_view: {
+    minHeight: height,
+    backgroundColor: '#EFEEEE',
   },
   tableHeader: {
     flexDirection: 'row',
@@ -16,6 +21,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 26,
     backgroundColor: '#EFEEEE',
+    marginBottom: `${(height / 100) * 10}%`,
   },
   tableRow: {
     flexDirection: 'row',

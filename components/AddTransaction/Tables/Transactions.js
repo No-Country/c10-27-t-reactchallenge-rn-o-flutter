@@ -16,13 +16,12 @@ const { height } = Dimensions.get('window');
 const TransactionsStyles = StyleSheet.create({
   container_view: {
     flexDirection: 'column',
-    backgroundColor: 'transparent',
+    backgroundColor: '#F6F6FD',
   },
   container: {
-    minHeight: height,
     flexDirection: 'column',
     gap: 20,
-    paddingBottom: 30,
+    paddingBottom: `${(height / 100) * 0.4}%`,
     backgroundColor: '#F6F6FD',
   },
 });
@@ -123,7 +122,7 @@ export default function Transactions({ navigation, params }) {
         amount: enterAmount,
         account: selectAccount,
         date,
-        category: selectedCategory.title,
+        category: selectedCategory,
         annotations,
       };
 

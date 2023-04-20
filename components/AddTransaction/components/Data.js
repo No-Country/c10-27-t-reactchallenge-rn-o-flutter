@@ -11,8 +11,6 @@ const DataStyles = StyleSheet.create({
   parentContainer: {
     flexDirection: 'row',
     width: '100%',
-    paddingHorizontal: 20,
-    gap: 10,
   },
   container: {
     width: '50%',
@@ -86,7 +84,7 @@ export default function Data({ params }) {
 
   return (
     <View style={DataStyles.parentContainer}>
-      <View style={DataStyles.container}>
+      <View style={{ ...DataStyles.container, paddingLeft: 16, paddingRight: 4 }}>
         <Button
           title="Mostrar Picker"
           mode="contained"
@@ -110,7 +108,7 @@ export default function Data({ params }) {
         </List.Accordion>
       </View>
 
-      <View style={DataStyles.container}>
+      <View style={{ ...DataStyles.container, paddingLeft: 4, paddingRight: 16 }}>
         <Button
           title="Fecha"
           mode="contained"

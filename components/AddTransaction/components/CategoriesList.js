@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-paper';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
@@ -12,17 +12,21 @@ const { whiteListOfIcons } = CategoriesExport();
 
 const CategoriesListStyles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     flexDirection: 'column',
     gap: 10,
   },
   buttonTitle: {
     backgroundColor: 'transparent',
   },
-
-  item: {
+  itemContainer: {
+    width: '25%',
     marginBottom: 10,
-    width: `${width < 400 ? '25%' : 76}`,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  item: {
+    width: 76,
     height: 71,
     flexDirection: 'column',
     alignItems: 'center',
@@ -88,35 +92,35 @@ export default function CategoriesList({ params }) {
 
   const renderCategoriesItems = () => {
     const items = itemsCategoriesCopy.map((item) => (
-      <View
-        style={{
-          ...CategoriesListStyles.item,
-          backgroundColor: `${
-            item.id === selectedCategory.id ? item.backgroundColor : 'transparent'
-          }`,
-        }}
-        key={item.id}
-      >
-        {/* <Image source={item.image} style={CategoriesListStyles.imageItem} /> */}
-        <View
+      <View style={CategoriesListStyles.itemContainer} key={item.id}>
+        <TouchableOpacity
+          onPress={() => changeSelectedCategorie(item)}
           style={{
-            ...CategoriesListStyles.imageItemContainer,
+            ...CategoriesListStyles.item,
             backgroundColor: item.backgroundColor,
           }}
+          activeOpacity={0.8}
         >
-          {/* <item.image /> */}
-          {renderImage({ imageIndex: item.image })}
-        </View>
-        <Text style={CategoriesListStyles.titleItems}>{item.title}</Text>
-        <Button
-          mode="contained"
-          style={CategoriesListStyles.buttonItem}
-          labelStyle={CategoriesListStyles.buttonItemLabel}
-          onPress={() => changeSelectedCategorie(item)}
-          theme={{
-            colors: { ...CategoriesListStyles.buttonItemTheme, onPrimary: item.backgroundColor },
-          }}
-        />
+          <View
+            style={{
+              ...CategoriesListStyles.item,
+              backgroundColor: `${
+                item.id === selectedCategory.id ? item.backgroundColor : '#F6F6FD'
+              }`,
+            }}
+          >
+            {/* <Image source={item.image} style={CategoriesListStyles.image} /> */}
+            <View
+              style={{
+                ...CategoriesListStyles.imageItemContainer,
+                backgroundColor: item.backgroundColor,
+              }}
+            >
+              {renderImage({ imageIndex: item.image })}
+            </View>
+            <Text style={CategoriesListStyles.titleItems}>{item.title}</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     ));
     return items;
@@ -193,15 +197,13 @@ export default function CategoriesList({ params }) {
       <View style={{ width: '100%', flexDirection: 'row', flexWrap: 'wrap' }}>
         {itemsCategoriesCopy && renderCategoriesItems()}
 
-        <View style={CategoriesListStyles.item}>
-          <View style={{ ...CategoriesListStyles.imageItemContainer, backgroundColor: '#FA6C17' }}>
-            <PlusIcon />
-          </View>
-          <Text style={CategoriesListStyles.titleItems}>Más</Text>
-          <Button
-            mode="contained"
-            style={{ position: 'absolute', height: '100%', width: '100%', borderRadius: 10 }}
-            labelStyle={{ width: '100%', paddingVertical: '30%' }}
+        <View style={CategoriesListStyles.itemContainer}>
+          <TouchableOpacity
+            style={{
+              ...CategoriesListStyles.item,
+              backgroundColor: '#FA6C17',
+            }}
+            activeOpacity={0.8}
             onPress={() =>
               !selectedCategory.id &&
               navigation.navigate('AddCategory', {
@@ -210,13 +212,16 @@ export default function CategoriesList({ params }) {
                 nameTransaction,
               })
             }
-            theme={{
-              colors: {
-                primary: 'transparent',
-                onPrimary: '#FA6C17',
-              },
-            }}
-          />
+          >
+            <View style={{ ...CategoriesListStyles.item, backgroundColor: '#F6F6FD' }}>
+              <View
+                style={{ ...CategoriesListStyles.imageItemContainer, backgroundColor: '#FA6C17' }}
+              >
+                <PlusIcon />
+              </View>
+              <Text style={CategoriesListStyles.titleItems}>Más</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

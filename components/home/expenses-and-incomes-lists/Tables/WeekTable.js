@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { renderImage, useDetailsNavigation } from './utils';
 import rowArrow from '../../../../assets/home/tablerow-action-arrow.png';
+
 function WeekTable({ tableData, listOfCategories }) {
   const navigateToDetails = useDetailsNavigation();
   const renderTableHeader = () => (
@@ -106,11 +107,11 @@ function WeekTable({ tableData, listOfCategories }) {
   };
 
   return (
-    <View contentContainerStyle={{ minHeight: 500 }}>
-      <View style={styles.container}>
-        {renderTableHeader()}
+    <View style={styles.container}>
+      {renderTableHeader()}
+      <ScrollView contentContainerStyle={styles.container_view}>
         <View style={styles.tableRowContainer}>{renderTableRow()}</View>
-      </View>
+      </ScrollView>
     </View>
   );
 }

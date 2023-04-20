@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   titleItems: {
     fontSize: 25,
     textAlign: 'center',
-    fontFamily: 'ubuntu-regular',
+    fontFamily: 'ubuntu-bold',
   },
   messageItems: {
     marginTop: 20,

@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 import getAsyncStorageData from '../../../../utils/get-storage-data';
@@ -93,7 +93,7 @@ function ButtonGroup({ route }) {
   if (tableData.length === 0) return null;
 
   return (
-    <ScrollView>
+    <View>
       <View style={{ paddingTop: 24, flexDirection: 'row', justifyContent: 'space-around' }}>
         {renderButton('Día', 1)}
         {renderButton('Semana', 2)}
@@ -105,7 +105,7 @@ function ButtonGroup({ route }) {
         tableData={tableData}
         listOfCategories={listOfCategories}
       />
-    </ScrollView>
+    </View>
   );
 }
 
