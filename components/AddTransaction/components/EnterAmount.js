@@ -1,7 +1,8 @@
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-// import { LinearGradient } from 'expo-linear-gradient';
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import LayerBackground from '../../generalComponents/layerBackground';
+import getAsyncStorageData from '../../../utils/get-storage-data';
 
 const EnterAmountStyles = StyleSheet.create({
   container: {
@@ -72,6 +73,15 @@ export default function EnterAmount({
   changeConcept,
   titleOfTheFirstInput,
 }) {
+  const [currency, setCurrency] = useState('');
+  useEffect(() => {
+    const init = async () => {
+      const data = await getAsyncStorageData('userCurrency');
+      setCurrency(data.currency);
+    };
+    init();
+  }, []);
+
   return (
     <LayerBackground
       params={{
@@ -114,7 +124,7 @@ export default function EnterAmount({
             style={EnterAmountStyles.inputAmount}
             maxLength={17}
           />
-          <Text style={EnterAmountStyles.currency}> USD </Text>
+          <Text style={EnterAmountStyles.currency}> {currency} </Text>
         </View>
       </View>
     </LayerBackground>
