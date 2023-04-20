@@ -13,19 +13,16 @@ const formatDate = (date) => {
 };
 
 const renderImage = (category) => {
-  const { image, backgroundColor } = category ?? {};
-
+  const { image, backgroundColor, fill } = category ?? {};
   if (!image) {
     return <View style={styles.imageItemContainer} />;
   }
-
   const ImageSvg = whiteListOfIcons[Number(image)];
-
   return (
     <View
       style={{
         ...styles.imageItemContainer,
-        backgroundColor: backgroundColor ?? 'gray',
+        backgroundColor: fill ?? backgroundColor,
       }}
     >
       <ImageSvg width={24} height={24} />

@@ -10,13 +10,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#EFEEEE',
     paddingTop: 10,
-    minHeight: height,
-    maxHeight: '100%',
+    marginBottom: `${(height / 100) * 14}%`,
   },
   scrollView: {
     flexDirection: 'column',
     marginTop: 30,
-    // backgroundColor: '#EFEEEE',
+    backgroundColor: '#EFEEEE',
   },
   row: {
     flexDirection: 'row',
@@ -78,8 +77,8 @@ function Table({ tableData, currency }) {
             >
               <View style={styles.leftCol}>
                 <Text style={styles.percentage}>{rowData.percentage}%</Text>
-                <View style={[styles.dot, { backgroundColor: rowData.svg.fill }]} />
-                {renderImage(rowData.category)}
+                {/* <View style={[styles.dot, { backgroundColor: rowData.svg.fill }]} /> */}
+                {renderImage({ ...rowData.category, ...rowData.svg })}
                 <Text style={styles.category}>{rowData.category.title}</Text>
               </View>
 

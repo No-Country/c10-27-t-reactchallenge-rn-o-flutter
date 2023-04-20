@@ -1,5 +1,6 @@
 /* eslint-disable no-plusplus */
 import React, { useState, useEffect, createContext } from 'react';
+import { Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import getAsyncStorageData from '../utils/get-storage-data';
 import CategoriesExport from '../assets/categories/categoriesExport';
@@ -62,8 +63,14 @@ function MockedDataProvider(props) {
       };
       setTablesMockData(generatedTablesMockData);
     };
-    if (!Object.entries(tablesMockData).length && process.env.MOCK_DATA !== 'disabled')
+
+    const alreadyGenerated = Object.entries(tablesMockData).length;
+    const disabledOnAndroidForDemo = process.env.DEMO_MODE && Platform.OS !== 'ios';
+    const disabledInApk = process.env.MOCK_DATA !== 'disabled';
+
+    if (!alreadyGenerated && !disabledOnAndroidForDemo && disabledInApk) {
       getRandomTableData();
+    }
   }, [tablesMockData]);
 
   return <MockedDataContext.Provider value={tablesMockData}>{children}</MockedDataContext.Provider>;

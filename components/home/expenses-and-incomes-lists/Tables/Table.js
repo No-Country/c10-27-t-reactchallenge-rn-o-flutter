@@ -165,7 +165,7 @@ export default function Table({ tableData, typeTable }) {
   return (
     <View style={styles.container}>
       {renderTableHeader()}
-      <ScrollView contentContainerStyle={{ minHeight: 500 }}>
+      <ScrollView contentContainerStyle={{ minHeight: 500, backgroundColor: '#EFEEEE' }}>
         <View style={styles.tableRowContainer}>{renderTableRow()}</View>
       </ScrollView>
     </View>

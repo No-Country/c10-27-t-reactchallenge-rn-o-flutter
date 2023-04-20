@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
     height: 70,
     width: '100%',
     marginBottom: 45,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     textAlign: 'center', // center the text horizontally
     alignSelf: 'center', // center the text vertically
   },

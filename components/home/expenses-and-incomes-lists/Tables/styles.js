@@ -1,15 +1,15 @@
 import { StyleSheet, Dimensions } from 'react-native';
+const { height } = Dimensions.get('screen');
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F6F6FD',
-    paddingTop: 20,
+    paddingTop: 24,
   },
   tableHeader: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
-    paddingVertical: 10,
     paddingBottom: 16,
     backgroundColor: '#F6F6FD',
   },
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 26,
     backgroundColor: '#EFEEEE',
+    marginBottom: `${(height / 100) * 9}%`,
   },
   tableRow: {
     flexDirection: 'row',
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   startingTableRow: {
+    flex: 1,
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#99A3A4',
@@ -54,9 +56,19 @@ const styles = StyleSheet.create({
     letterSpacing: -0.3,
   },
   amountCell: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
     textAlign: 'right',
     fontWeight: 700,
     fontFamily: 'ubuntu-bold',
+  },
+  rowArrow: {
+    height: 13,
+    width: 13,
+    paddingTop: 1,
+    paddingLeft: 10,
+    paddingRight: 14,
   },
   label: {
     position: 'absolute',
@@ -65,8 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#01B496',
     width: 150,
-    left: (Dimensions.get('window').width - 150) / 2,
-    right: (Dimensions.get('window').width - 150) / 2,
+    left: 100,
     borderRadius: 10,
     height: 24,
   },

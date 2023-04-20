@@ -54,7 +54,7 @@ PeriodButton.propTypes = {
   setDateFilter: PropTypes.func.isRequired,
   buttonClicked: PropTypes.number.isRequired,
   // eslint-disable-next-line react/require-default-props
-  dateFilter: PropTypes.string,
+  dateFilter: PropTypes.instanceOf(Date),
 };
 
 export default PeriodButton;

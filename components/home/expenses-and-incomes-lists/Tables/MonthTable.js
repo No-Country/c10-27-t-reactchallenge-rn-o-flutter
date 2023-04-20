@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { renderImage, useDetailsNavigation, creatingKey } from './utils';
+import rowArrow from '../../../../assets/home/tablerow-action-arrow.png';
 
 function MonthTable({ tableData }) {
   const navigateToDetails = useDetailsNavigation();
@@ -65,7 +66,12 @@ function MonthTable({ tableData }) {
               {renderImage(rowData.category)}
               <Text>{rowData.category.title}</Text>
             </View>
-            <Text style={[styles.tableCell, styles.amountCell]}>{rowData.amount}</Text>
+            <Text style={[styles.tableCell, styles.amountCell]}>
+              {rowData.amount}
+              <View style={styles.rowArrow}>
+                <Image source={rowArrow} />
+              </View>
+            </Text>
           </TouchableOpacity>
         </View>
       ));
@@ -78,12 +84,12 @@ function MonthTable({ tableData }) {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ minHeight: 500 }}>
+    <View contentContainerStyle={{ minHeight: 500 }}>
       <View style={styles.container}>
         {renderTableHeader()}
         <View style={styles.tableRowContainer}>{renderTableRow()}</View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

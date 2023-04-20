@@ -5,25 +5,13 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
 import getAsyncStorageData from '../../../../utils/get-storage-data';
-
 import { MockedDataContext } from '../../../../hooks/useMockedData';
 import useCategories from '../../../../hooks/useCategories';
 import Table from './Table';
 
-const tableComponents = {
-  1: Table,
-  2: Table,
-  3: Table,
-};
-
 function RenderSelectedTable({ buttonClicked, tableData, listOfCategories }) {
-  const TableComponent = tableComponents[buttonClicked];
   return (
-    <TableComponent
-      tableData={tableData}
-      listOfCategories={listOfCategories}
-      typeTable={buttonClicked}
-    />
+    <Table tableData={tableData} listOfCategories={listOfCategories} typeTable={buttonClicked} />
   );
 }
 
@@ -33,7 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff6f0',
   },
   buttonText: {
-    // fontWeight: 500,
     fontFamily: 'ubuntu-regular',
   },
   activeButton: {
