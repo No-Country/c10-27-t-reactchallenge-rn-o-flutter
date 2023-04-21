@@ -105,7 +105,7 @@ export default function CategoriesList({ params }) {
               ...CategoriesListStyles.item,
               backgroundColor: `${
                 item.id === selectedCategory.id ? item.backgroundColor : 'transparent'
-              }`
+              }`,
             }}
           >
             <View
